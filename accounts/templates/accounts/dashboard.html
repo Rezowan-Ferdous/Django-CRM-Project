@@ -1,0 +1,60 @@
+{% extends 'accounts/main.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+
+{% include 'accounts/status.html' %}
+<br>
+<div class="container-fluid row">
+<!-- <h5>customer</h5> -->
+<hr>
+<div class="col-md-5">
+  <a class="btn btn-primary"> create Customer </a>
+  <table class="table">
+    <tr>
+      <th> Details</th>
+      <th> Customer</th>
+      <th> Phone</th>
+
+    </tr>
+{% for customer in customers %}
+<tr>
+  <td> <a class="btn btn-sm btn-info" href="{% url 'accounts:customer' customer.id %}">view</a></td>
+  <td> {{customer.name}}</td>
+  <td> {{customer.phone}}</td>
+  <td> {{customer.price}}</td>
+</tr>
+{% endfor %}
+</table>
+
+  </div>
+
+  <div class="col-md-7">
+        <table class="table">
+      <tr>
+        <th> Product</th>
+        <th> Date Ordered</th>
+        <th> Status</th>
+        <th> Update</th>
+        <th> Remove</th>
+
+      </tr>
+  {% for i in orders %}
+  <tr>
+    <td> {{i.product}}</td>
+    <td> {{i.date_created}}</td>
+    <td> {{i.status}}</td>
+      <td> <a class="btn btn-warning" href="{% url 'accounts:update_order' i.id %}">Update </a></td>
+      <td> <a class="btn btn-danger" href="{% url 'accounts:delete_order' i.id %}"> Delete </a></td>
+  </tr>
+  {% endfor %}
+  </table>
+
+    </div>
+</div>
+<h2> This is the latest Home</h2>
+<h1> Home </h1>
+
+<p> this is our latest news contact me </p>
+{% endblock %}
